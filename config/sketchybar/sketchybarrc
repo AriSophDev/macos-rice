@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+sketchybar --remove all
+
+# === BAR ===
+sketchybar --bar \
+  color=0xcc000000 \
+  height=28 \
+  padding_left=8 \
+  padding_right=8 \
+  corner_radius=0 \
+  margin=0 \
+  background.color=0xcc000000 \
+  icon.color=0xffffffff \
+  label.color=0xffffffff
+
+# === FONTS (opcional) ===
+# Usa JetBrains Mono Nerd Font si la tienes
+FONT="JetBrainsMono Nerd Font:Bold:14"
+
+# === LEFT SECTION ===
+sketchybar --add item apple left \
+  --set apple \
+    label="" \
+    icon.padding_left=4 \
+    icon.padding_right=6 \
+    label.font="$FONT" \
+    update_freq=0
+
+# === CENTER SECTION (Clock) ===
+sketchybar --add item clock center \
+  --set clock \
+    script="$HOME/.config/sketchybar/plugins/clock.sh" \
+    update_freq=20 \
+    label.padding_left=10 \
+    label.padding_right=10 \
+    label.font="$FONT"
+
+# === RIGHT SECTION ===
+
+# CPU (monocromático)
+sketchybar --add item cpu right \
+  --set cpu \
+    script="$HOME/.config/sketchybar/plugins/cpu.sh" \
+    update_freq=3 \
+    label.font="$FONT" \
+    icon="" \
+    icon.padding_left=10
+
+# WIFI (monocromático)
+sketchybar --add item wifi right \
+  --set wifi \
+    script="$HOME/.config/sketchybar/plugins/wifi.sh" \
+    update_freq=10 \
+    label.font="$FONT" \
+    icon="" \
+    icon.padding_left=12
+
+# Battery (monocromático)
+sketchybar --add item battery right \
+  --set battery \
+    script="$HOME/.config/sketchybar/plugins/battery.sh" \
+    update_freq=20 \
+    label.font="$FONT" \
+    icon.padding_left=12
+
+sketchybar --update
